@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>one_to_many_relationship</module>
+        <module>many_to_many_relationships</module>
     </modules>
 
     <properties>
