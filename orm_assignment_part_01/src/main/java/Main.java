@@ -282,4 +282,50 @@ public class Main {
         }
 
     }
+    private static Boolean crudOperations(Book book, String operation) {
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        switch (operation) {
+            case "isValid":
+
+                Book book1 = session.get(Book.class, book.getBook_id());
+                return book1 == null;
+
+            case "save":
+                session.persist(book);
+                transaction.commit();
+                session.close();
+                return true;
+
+            case "update":
+                Book book2 = session.get(Book.class, book.getBook_id());
+                book2.setBook_title(book.getBook_title());
+                book2.setBook_isbn(book.getBook_isbn());
+                System.out.println(book2.getBook_isbn()+"  "+book2.getBook_title());
+                session.persist(book2);
+                transaction.commit();
+                session.close();
+                return true;
+
+            case "view":
+                Book book3 = session.get(Book.class, book.getBook_id());
+
+                System.out.println("Book ID : " + book3.getBook_id());
+                System.out.println("Book Title : " + book3.getBook_title());
+                System.out.println("Book ISBN : " + book3.getBook_isbn());
+                session.close();
+                return true;
+
+            case "remove":
+                session.remove(book);
+                transaction.commit();
+                session.close();
+                return true;
+
+        }
+
+        return null;
+    }
 }
