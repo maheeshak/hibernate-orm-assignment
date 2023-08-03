@@ -1,3 +1,8 @@
+import entity.Book;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.FactoryConfiguration;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -64,6 +69,7 @@ public class Main {
                 continue;
             }
         }
+    }
         private static void saveBook () {
             Scanner input = new Scanner(System.in);
             Integer option = 0;
@@ -122,7 +128,7 @@ public class Main {
 
         }
 
-    }
+
     private static void updateBook() {
         Scanner input = new Scanner(System.in);
         Integer option = 0;
@@ -182,6 +188,7 @@ public class Main {
 
 
     }
+
     private static void viewBook() {
         Scanner input = new Scanner(System.in);
         Integer option = 0;
@@ -221,7 +228,7 @@ public class Main {
 
                     Boolean isSaved = crudOperations(book, "view");
                     System.out.println("");
-                }else {
+                } else {
                     System.out.println("Invalid ID");
                 }
             } else {
@@ -231,6 +238,7 @@ public class Main {
 
 
     }
+
     private static void removeBook() {
         Scanner input = new Scanner(System.in);
         Integer option = 0;
@@ -270,10 +278,10 @@ public class Main {
 
                     Boolean isRemove = crudOperations(book, "remove");
                     System.out.println("");
-                    if (isRemove){
+                    if (isRemove) {
                         System.out.println("Book is Removed :) !!!");
                     }
-                }else {
+                } else {
                     System.out.println("Invalid ID");
                 }
             } else {
@@ -282,6 +290,7 @@ public class Main {
         }
 
     }
+
     private static Boolean crudOperations(Book book, String operation) {
 
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -303,7 +312,7 @@ public class Main {
                 Book book2 = session.get(Book.class, book.getBook_id());
                 book2.setBook_title(book.getBook_title());
                 book2.setBook_isbn(book.getBook_isbn());
-                System.out.println(book2.getBook_isbn()+"  "+book2.getBook_title());
+                System.out.println(book2.getBook_isbn() + "  " + book2.getBook_title());
                 session.persist(book2);
                 transaction.commit();
                 session.close();
