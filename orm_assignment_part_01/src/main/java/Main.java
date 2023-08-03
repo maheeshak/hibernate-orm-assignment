@@ -182,4 +182,53 @@ public class Main {
 
 
     }
+    private static void viewBook() {
+        Scanner input = new Scanner(System.in);
+        Integer option = 0;
+        while (option != -1) {
+
+            for (int i = 0; i < 25; i++) {
+                System.out.print("-");
+
+            }
+            System.out.print("\n");
+            System.out.print("|");
+            System.out.print("\t\tView Book");
+            System.out.println("\t\t|");
+
+            for (int i = 0; i < 25; i++) {
+                System.out.print("-");
+            }
+
+            System.out.println("");
+
+
+            System.out.println("[01] View Book");
+            System.out.println("[02] Main Page");
+            System.out.println("");
+            System.out.print("Please Select your option : ");
+            option = input.nextInt();
+            if (option == 1) {
+
+                input.nextLine();
+                System.out.print("Book ID : ");
+                String book_id = input.nextLine();
+
+                Book book = new Book(book_id, "", "");
+
+                Boolean isValid = crudOperations(book, "isValid");
+                if (!isValid) {
+
+                    Boolean isSaved = crudOperations(book, "view");
+                    System.out.println("");
+                }else {
+                    System.out.println("Invalid ID");
+                }
+            } else {
+                mainPage();
+            }
+        }
+
+
+    }
 }
